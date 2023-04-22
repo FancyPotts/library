@@ -1,15 +1,15 @@
 # library
 
-- Book object
+- [x] Book object
 	- Title
 	- Author
 	- Number of pages
 	- Read or not
 	- Memorable quote
-- Library array of objects
-- Output as flexbox items
+- [ ] Library array of objects
+- [ ] Output as flexbox items
 
 ## Optional addons
-- Search
-- Sorting
-- Login
+- [ ] Search
+- [ ] Sorting
+- [ ] Login
