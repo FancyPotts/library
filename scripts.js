@@ -14,8 +14,8 @@ const theHiddenDimension = new book('The Hidden Dimension', 'Edward T. Hall', 19
 theHiddenDimension.info()
 
 
-function library () {
-  let books = []
+const library = (() => {
+  const books = []
   function list () {
     console.table(books)
   }
@@ -27,11 +27,9 @@ function library () {
     addBook: addBook,
     list: list
   };
-}
+})();
 
-const myLibrary = library()
+console.log(library)
 
-console.log(myLibrary)
-
-myLibrary.addBook(theHiddenDimension)
-myLibrary.list()
+library.addBook(theHiddenDimension)
+library.list()
