@@ -6,7 +6,7 @@
 	- Number of pages
 	- Read or not
 	- Memorable quote
-- [ ] Library array of objects
+- [x] Library array of objects
 - [ ] Output as flexbox items
 
 ## Optional addons

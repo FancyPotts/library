@@ -1,4 +1,4 @@
-function addBook (title, author, pages, read = false, quote) {
+function book (title, author, pages, read = false, quote) {
   this.title = title
   this.author = author
   this.pages = pages
@@ -9,6 +9,29 @@ function addBook (title, author, pages, read = false, quote) {
   }
 };
 
-const theHiddenDimension = new addBook('The Hidden Dimension', 'Edward T. Hall', '195', false)
+const theHiddenDimension = new book('The Hidden Dimension', 'Edward T. Hall', 195, false)
 
 theHiddenDimension.info()
+
+
+function library () {
+  let books = []
+  function list () {
+    console.table(books)
+  }
+  function addBook (book) {
+    books.unshift(book)
+  }
+  return {
+    books: books,
+    addBook: addBook,
+    list: list
+  };
+}
+
+const myLibrary = library()
+
+console.log(myLibrary)
+
+myLibrary.addBook(theHiddenDimension)
+myLibrary.list()
