@@ -5,31 +5,47 @@ function book (title, author, pages, read = false, quote) {
   this.read = read
   this.quote = quote
   this.info = function () {
-    console.log(`${this.title} by ${this.author}, ${this.pages} pages long`)
+    return `${this.title} by ${this.author}, ${this.pages} pages long`
   }
 };
 
-const theHiddenDimension = new book('The Hidden Dimension', 'Edward T. Hall', 195, false)
+function haveRead (book) {
+  if (book.read === false) {
+    return 'This book has not been read.'
+  } else {
+    return 'This book has been read.'
+  }
+}
 
-theHiddenDimension.info()
+const display = document.getElementById('display')
 
+const theHiddenDimension = new book('The Hidden Dimension', 'Edward T. Hall', 195)
 
 const library = (() => {
   const books = []
   function list () {
-    console.table(books)
+    return books
+  }
+  function info (num) {
+    return books[num].info() + '. ' + haveRead(books[num])
   }
   function addBook (book) {
     books.unshift(book)
   }
+  function update () {
+    display.textContent = library.info(0)
+  }
   return {
     books: books,
     addBook: addBook,
-    list: list
+    list: list,
+    info: info,
+    update: update
   };
 })();
 
-console.log(library)
-
 library.addBook(theHiddenDimension)
-library.list()
+console.table(library.list())
+display.textContent = library.info(0)
+
+/* Add functions to display array of books and update whenever a book is added */
