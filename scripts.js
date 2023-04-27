@@ -1,4 +1,4 @@
-const display = document.getElementById('display')
+const displayBook = document.getElementById('display')
 
 const library = (() => {
   const books = []
@@ -25,12 +25,17 @@ const library = (() => {
   function addBook (title, author, pages, read, quote, quoteauthor) {
     const book = new Book(title, author, pages, read, quote, quoteauthor)
     books.unshift(book)
+    display(library.books[0])
+  }
+  function display (book) {
+    displayBook.innerHTML += `<h3>${library.books[0].info()}</h3><blockquote><h5>${book.quote}</h5></blockquote><figcaption>${book.quoteauthor}</figcaption><br>${haveRead(book)}`
   }
   return {
     books: books,
     addBook: addBook,
     list: list,
-    info: info
+    info: info,
+    display: display
   }
 })()
 
@@ -52,9 +57,9 @@ library.addBook('Crooked Kingdom', 'Leigh Bardugo', 546, true, 'You\'re not weak
 
 console.table(library.list())
 
-library.books.forEach((book) => {
-  display.innerHTML += `<h3>${book.info()}</h3><blockquote><h5>${book.quote}</h5></blockquote><figcaption>${book.quoteauthor}</figcaption><br>${haveRead(book)}`
-});
+// library.books.forEach((book) => {
+//   display(book)
+// });
 
 /* Add functions to display array of books and update whenever a book is added */
 

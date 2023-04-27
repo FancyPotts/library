@@ -8,14 +8,14 @@
 	- Memorable quote
 - [x] Library array of objects
 - [x] Use closure
-	- [ ] Refactor adding data to accept only certain inputs
 - [x] Display array of books
-- [ ] Be able to add book
+- [ ] Make Modal for adding book
 - [ ] Update page whenever a book is added
 - [ ] Output as flexbox items
 	- [ ] Sort at random on every window load.
 
 ## Optional addons
 - [ ] Search
+	- Use indexOf.
 - [ ] Sorting
 - [ ] Login
