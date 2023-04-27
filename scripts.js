@@ -1,7 +1,7 @@
 const displayBook = document.getElementById('display')
 
 const library = (() => {
-  const books = []
+  let books = []
   const addABook = document.getElementsByTagName('button')
 
   function Book (title, author, pages, read = false, quote = 'No quote (yet)', quoteauthor = '') {
@@ -14,9 +14,12 @@ const library = (() => {
     this.info = function () {
       return `<u>${this.title}</u> by <i>${this.author}</i>, ${this.pages} pages long`
     }
+    this.del = function () {
+      books = books.filter((book) => book.title !== this.title);
+    }
   }
   function list () {
-    return books
+    return console.table(books)
   }
 
   function info (num) {
@@ -28,7 +31,10 @@ const library = (() => {
     display(library.books[0])
   }
   function display (book) {
-    displayBook.innerHTML += `<h3>${library.books[0].info()}</h3><blockquote><h5>${book.quote}</h5></blockquote><figcaption>${book.quoteauthor}</figcaption><br>${haveRead(book)}`
+    displayBook.innerHTML += `<div><h3>${library.books[0].info()}</h3><button disabled>Remove</button></div>
+    <blockquote><h5>${book.quote}</h5></blockquote>
+    <figcaption>${book.quoteauthor}</figcaption><br>
+    ${haveRead(book)}<br>`
   }
   return {
     books: books,
@@ -47,21 +53,11 @@ function haveRead (book) {
   }
 }
 
-function booksCheck() {
-  console.table(library.list())
-}
-
 library.addBook('The Hidden Dimension', 'Edward T. Hall', 195)
 library.addBook('Meditations', 'Marcus Aurelius', 191, true, 'The book is full of quotes.')
 library.addBook('Crooked Kingdom', 'Leigh Bardugo', 546, true, 'You\'re not weak because you can\'t read. You\'re weak because you\'re afraid of people seeing your weakness. You\'re letting shame decide who you are.', 'Kaz')
 
-console.table(library.list())
-
-// library.books.forEach((book) => {
-//   display(book)
-// });
-
-/* Add functions to display array of books and update whenever a book is added */
+/* Add .filter function to remove and forEach(library.display) */
 
 /* Add an element and add card class to display on page. */
 
