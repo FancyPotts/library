@@ -10,15 +10,17 @@
 - [x] Library array of objects
 - [x] Use closure
 - [x] Display array of books
-- [ ] Make Modal for adding book
-- [ ] Update page 
-	- [x] Whenever a book is added
-	- [ ] Add button to delete book from page and array
+- [ ] Make modal for adding book
+- [ ] Add function
+	- [x] Add a book
+		- [x] Update page
+	- [x] Delete book
+		- [ ] Update page
 - [ ] Output as flexbox items
 	- [ ] Sort at random on every window load.
 
 ## Optional addons
 - [ ] Search
-	- Use indexOf.
+	- Use indexOf
 - [ ] Sorting
 - [ ] Login

@@ -1,8 +1,8 @@
-const displayBook = document.getElementById('display')
-
 const library = (() => {
   let books = []
-  const addABook = document.getElementsByTagName('button')
+  const addABook = document.getElementById('add')
+  const delABook = document.querySelectorAll('.del')
+  const displayBook = document.getElementById('display')
 
   function Book (title, author, pages, read = false, quote = 'No quote (yet)', quoteauthor = '') {
     this.title = title
@@ -15,7 +15,7 @@ const library = (() => {
       return `<u>${this.title}</u> by <i>${this.author}</i>, ${this.pages} pages long`
     }
     this.del = function () {
-      books = books.filter((book) => book.title !== this.title);
+      books = books.filter((book) => book.title !== this.title)
     }
   }
   function list () {
@@ -31,7 +31,7 @@ const library = (() => {
     display(library.books[0])
   }
   function display (book) {
-    displayBook.innerHTML += `<div><h3>${library.books[0].info()}</h3><button disabled>Remove</button></div>
+    displayBook.innerHTML += `<div><h3>${book.info()}</h3><button class='del' disabled>Remove</button></div>
     <blockquote><h5>${book.quote}</h5></blockquote>
     <figcaption>${book.quoteauthor}</figcaption><br>
     ${haveRead(book)}<br>`
