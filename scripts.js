@@ -1,4 +1,4 @@
-const library = (() => {
+let library = (() => {
   let books = []
   const addABook = document.getElementById('add')
   const delABook = document.querySelectorAll('.del')
@@ -16,6 +16,11 @@ const library = (() => {
     }
     this.del = function () {
       books = books.filter((book) => book.title !== this.title)
+      /* This does not update the library to show the correct number of books in array. This also affects the ability to add more books */
+      displayBook.innerHTML = ''
+      books.forEach(book => display(book))
+      library.list()
+      console.log(library)
     }
   }
   function list () {
@@ -27,10 +32,12 @@ const library = (() => {
   }
   function addBook (title, author, pages, read, quote, quoteauthor) {
     const book = new Book(title, author, pages, read, quote, quoteauthor)
-    books.unshift(book)
-    display(library.books[0])
+    books.push(book)
+    const stack = library.books.findIndex(book => book.title === title)
+    display(library.books[stack])
   }
   function display (book) {
+    /* TODO: Change to Javascript instead of using HTML */
     displayBook.innerHTML += `<div><h3>${book.info()}</h3><button class='del' disabled>Remove</button></div>
     <blockquote><h5>${book.quote}</h5></blockquote>
     <figcaption>${book.quoteauthor}</figcaption><br>
@@ -57,9 +64,4 @@ library.addBook('The Hidden Dimension', 'Edward T. Hall', 195)
 library.addBook('Meditations', 'Marcus Aurelius', 191, true, 'The book is full of quotes.')
 library.addBook('Crooked Kingdom', 'Leigh Bardugo', 546, true, 'You\'re not weak because you can\'t read. You\'re weak because you\'re afraid of people seeing your weakness. You\'re letting shame decide who you are.', 'Kaz')
 
-/* Add .filter function to remove and forEach(library.display) */
-
-/* Add an element and add card class to display on page. */
-
-/* library.books.findIndex(i => i.title === "Crooked Kingdom")
-This can be used to search. It'll need to be all lower case and be able to search part of the string while typing in the search bar */
+/* Use flexbox and add card class to display books on page. */
