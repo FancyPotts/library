@@ -1,10 +1,8 @@
 let library = (() => {
   let books = []
-  const addABook = document.getElementById('add')
-  const delABook = document.querySelectorAll('.del')
   const displayBook = document.getElementById('display')
 
-  function Book (title, author, pages, read = false, quote = 'No quote (yet)', quoteauthor = '') {
+  function Book (title, author, pages, read = false, quote = 'No quote (yet)', quoteauthor = '', booksArray = books) {
     this.title = title
     this.author = author
     this.pages = pages
@@ -13,14 +11,6 @@ let library = (() => {
     this.quoteauthor = quoteauthor
     this.info = function () {
       return `<u>${this.title}</u> by <i>${this.author}</i>, ${this.pages} pages long`
-    }
-    this.del = function () {
-      books = books.filter((book) => book.title !== this.title)
-      /* This does not update the library to show the correct number of books in array. This also affects the ability to add more books */
-      displayBook.innerHTML = ''
-      books.forEach(book => display(book))
-      library.list()
-      console.log(library)
     }
   }
   function list () {
@@ -37,11 +27,30 @@ let library = (() => {
     display(library.books[stack])
   }
   function display (book) {
-    /* TODO: Change to Javascript instead of using HTML */
-    displayBook.innerHTML += `<div><h3>${book.info()}</h3><button class='del' disabled>Remove</button></div>
-    <blockquote><h5>${book.quote}</h5></blockquote>
-    <figcaption>${book.quoteauthor}</figcaption><br>
-    ${haveRead(book)}<br>`
+    const bookDiv = document.createElement('div')
+    const bookInfo = document.createElement('h3')
+    const bookDel = document.createElement('button')
+    const bookQuote = document.createElement('blockquote')
+    const bookQuoteText = document.createElement('h5')
+    const bookQuoteAuthor = document.createElement('figcaption')
+  
+    bookInfo.innerHTML = book.info()
+    bookDel.innerHTML = 'Remove'
+    bookDel.setAttribute('data-title', book.title)
+    bookDel.addEventListener('click', function() {
+      const title = this.getAttribute('data-title')
+      const bookIndex = books.findIndex(book => book.title === title)
+      books.splice(bookIndex, 1)
+      this.parentNode.remove()
+    })
+    bookQuoteText.innerHTML = book.quote
+    bookQuoteAuthor.innerHTML = book.quoteauthor
+    bookQuote.appendChild(bookQuoteText)
+    bookQuote.appendChild(bookQuoteAuthor)
+    bookDiv.appendChild(bookInfo)
+    bookDiv.appendChild(bookDel)
+    bookDiv.appendChild(bookQuote)
+    displayBook.appendChild(bookDiv)
   }
   return {
     books: books,
