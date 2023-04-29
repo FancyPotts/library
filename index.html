@@ -14,23 +14,23 @@
                     <legend>Add a book</legend>
                     <form id="form">
                         <label for="title">Title of the book*</label>
-                        <input type="text" id="title" required>
+                        <input type="text" id="title" placeholder="Fahrenheit 451
+                        " required>
                         <label for="author">Name of author*</label>
-                        <input type="text" id="author" required>
+                        <input type="text" id="author" placeholder="Ray Bradbury" required>
                         <label for="read">
                         <input type="checkbox" name="read" id="read">Read the book?<p id="answer">    Nope</p></label>
                         <label for="pages" >How many pages?</label>
-                        <input type="text" id="pages">
+                        <input type="text" id="pages" placeholder="158">
                         <label for="quote">Memorable quote?</label>
                         <textarea name="quote" id="quote" cols="30" rows="3" disabled placeholder="How would you know if you haven't read the book"></textarea>
                         <label for="quotewho">Who said the quote?</label>
-                        <input type="text" name="quotewho" id="quotewho" disabled placeholder="You haven't read the book">
-                        <label for="quotewhere">What page is this quote on?</label><input type="num" id="quotewhere" disabled>
+                        <input type="text" name="quotewho" id="quotewho" disabled>
+                        <label for="quotewhere">What page is this quote on?</label><input type="number" maxlength="4" max="5000" id="quotewhere" min="1" disabled>
                         <button id="submit">Add book to library</button>
                     </form>
                 </fieldset>
             </div>
-
 </div>
         <h1>Here be the Library of Alexandria.</h1>
         <h3>Oh. Oh dear. It has been burned down.</h3>

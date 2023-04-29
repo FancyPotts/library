@@ -2,7 +2,6 @@ const modal = document.getElementById('myModal')
 const btn = document.getElementById('myBtn')
 const span = document.getElementsByClassName('close')[0]
 
-
 btn.onclick = function () {
   modal.style.display = 'block'
 }
@@ -28,7 +27,7 @@ const library = (() => {
     this.quoteauthor = quoteauthor
     this.quotepage = quotepage
     this.info = function () {
-      return `<u>${this.title}</u> by <i>${this.author}</i>, ${this.pages} pages long`
+      return `<u>${this.title}</u> by <i>${this.author}</i>`
     }
   }
   function list () {
@@ -78,6 +77,33 @@ const library = (() => {
   }
 })()
 
+const bookRead = document.querySelector('#read')
+bookRead.addEventListener('click', checkboxClick)
+
+function checkboxClick () {
+  const quote = document.getElementById('quote')
+  const quoteWho = document.getElementById('quotewho')
+  const quoteWhere = document.getElementById('quotewhere')
+  const readBookAnswer = document.getElementById('answer')
+  if (bookRead.checked === true) {
+    quote.disabled = false
+    quoteWho.disabled = false
+    quoteWhere.disabled = false
+    quote.placeholder = 'It was a pleasure to burn.'
+    quoteWho.placeholder = 'Guy Montag'
+    quoteWhere.placeholder = 1
+    readBookAnswer.textContent = '    Yup'
+  } else {
+    document.getElementById('quote').disabled = true
+    document.getElementById('quotewho').disabled = true
+    document.getElementById('quotewhere').disabled = true
+    quote.placeholder = 'How would you know if you haven\'t read the book?'
+    quoteWho.placeholder = ''
+    quoteWhere.placeholder = ''
+    readBookAnswer.textContent = '    Nope'
+  }
+}
+
 const bookAdd = document.getElementById('submit')
 bookAdd.addEventListener('click', function (e) {
   e.preventDefault()
@@ -88,9 +114,13 @@ bookAdd.addEventListener('click', function (e) {
   const addBookQuote = document.getElementById('quote').value
   const addBookQuoteWho = document.getElementById('quotewho').value
   const addBookQuoteWhere = document.getElementById('quotewhere').value
-  library.addBook(addBookTitle, addBookAuthor,addBookPages, addBookRead, addBookQuote, addBookQuoteWho, addBookQuoteWhere)
-  modal.style.display = 'none'
-  document.getElementById('form').reset()
+  if (addBookTitle.length === 0 || addBookAuthor.length === 0) {
+    
+  } else {
+    library.addBook(addBookTitle, addBookAuthor,addBookPages, addBookRead, addBookQuote, addBookQuoteWho, addBookQuoteWhere)
+    modal.style.display = 'none'
+    document.getElementById('form').reset()
+  }
 })
 
 function haveRead (book) {
