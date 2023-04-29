@@ -18,6 +18,12 @@
 	- [x] Delete book
 		- Changed to splice, it modifies current array whereas filter generates a new one.
 		- [x] Update page
+	- [ ] Edit book
+		- Modify modal so it displays values and updates.
+		- [ ] Display values
+		- [ ] Change submit & legend
+			- [ ] Edit book
+			- [ ] innerHTML to reflect this
 - [ ] Output as flexbox items
 	- [ ] Sort at random on every window load.
 

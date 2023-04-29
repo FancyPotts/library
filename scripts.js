@@ -41,7 +41,7 @@ const library = (() => {
   }
   function addBook (title, author, pages, read, quote, quoteauthor, quotepage) {
     const book = new Book(title, author, pages, read, quote, quoteauthor, quotepage)
-    books.unshift(book)
+    books.push(book)
     const stack = library.books.findIndex(book => book.title === title)
     display(library.books[stack])
   }
@@ -49,10 +49,28 @@ const library = (() => {
     const bookDiv = document.createElement('div')
     const bookInfo = document.createElement('h3')
     const bookDel = document.createElement('button')
+    const bookEdit = document.createElement('button')
     const bookQuote = document.createElement('blockquote')
     const bookQuoteText = document.createElement('h5')
     const bookQuoteAuthor = document.createElement('figcaption')
     bookInfo.innerHTML = book.info()
+    bookEdit.innerHTML = 'Edit'
+    bookEdit.disabled = false
+    bookEdit.setAttribute('data-title', book.title)
+    bookEdit.onclick = function() {
+      const editLegend = document.getElementById('modalLegend')
+      const editBtn = document.getElementById('submit')
+      const addBookTitle = document.getElementById('title').value
+      const addBookAuthor = document.getElementById('author').value
+      const addBookPages = document.getElementById('pages').value
+      const addBookRead = document.getElementById('read').value === 'true'
+      const addBookQuote = document.getElementById('quote').value
+      const addBookQuoteWho = document.getElementById('quotewho').value
+      const addBookQuoteWhere = document.getElementById('quotewhere').value
+      editLegend.innerHTML = 'Edit a Book'
+      editBtn.innerHTML = 'Edit book details'
+      modal.style.display = 'block'
+    }
     bookDel.innerHTML = 'Remove'
     bookDel.setAttribute('data-title', book.title)
     bookDel.addEventListener('click', function() {
@@ -66,6 +84,7 @@ const library = (() => {
     bookQuote.appendChild(bookQuoteText)
     bookQuote.appendChild(bookQuoteAuthor)
     bookDiv.appendChild(bookInfo)
+    bookDiv.appendChild(bookEdit)
     bookDiv.appendChild(bookDel)
     bookDiv.appendChild(bookQuote)
     displayBook.appendChild(bookDiv)
