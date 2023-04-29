@@ -17,10 +17,12 @@
                         <input type="text" id="title">
                         <label for="author">Name of author</label><input type="text" id="author">
                         <label for="pages">How many pages?</label><input type="text" id="pages">
-                        <label for="read">Read the book?</label><input type="checkbox" name="read" id="read">
                         <label for="quote">Memorable quote?</label>
+                        <textarea name="quote" id="quote" cols="30" rows="3" disabled placeholder="You haven't read the book"></textarea>
                         <label for="quotewho">Who said the quote?</label>
-                        <!-- Make it so quote cannot be selected if the book has not been read. -->
+                        <input type="text" name="quotewho" id="quotewho" disabled placeholder="You haven't read the book">
+                        <label for="read"><input type="checkbox" name="read" id="read">Read the book? <p id="answer">No</p></label>
+                        <button id="submit" disabled="disabled">Add book</button>
                     </form>
                 </fieldset>
             </div>
