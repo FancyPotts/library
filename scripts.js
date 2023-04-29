@@ -1,31 +1,32 @@
-const modal = document.getElementById("myModal");
-const btn = document.getElementById("myBtn");
-const span = document.getElementsByClassName("close")[0];
+const modal = document.getElementById('myModal')
+const btn = document.getElementById('myBtn')
+const span = document.getElementsByClassName('close')[0]
 
-btn.onclick = function() {
-  modal.style.display = "block";
+
+btn.onclick = function () {
+  modal.style.display = 'block'
 }
-span.onclick = function() {
-  modal.style.display = "none";
+span.onclick = function () {
+  modal.style.display = 'none'
 }
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+window.onclick = function (event) {
+  if (event.target === modal) {
+    modal.style.display = 'none'
   }
 }
 
 const library = (() => {
   const books = []
   const displayBook = document.getElementById('display')
-  const addABook = document.getElementById('add')
 
-  function Book (title, author, pages, read = false, quote = 'No quote (yet)', quoteauthor = '') {
+  function Book (title, author, pages, read = false, quote = 'No quote (yet)', quoteauthor = '', quotepage = '') {
     this.title = title
     this.author = author
     this.pages = pages
     this.read = read
     this.quote = quote
     this.quoteauthor = quoteauthor
+    this.quotepage = quotepage
     this.info = function () {
       return `<u>${this.title}</u> by <i>${this.author}</i>, ${this.pages} pages long`
     }
@@ -37,15 +38,12 @@ const library = (() => {
   function info (num) {
     return books[num].info() + '. ' + haveRead(books[num])
   }
-  function addBook (title, author, pages, read, quote, quoteauthor) {
-    const book = new Book(title, author, pages, read, quote, quoteauthor)
+  function addBook (title, author, pages, read, quote, quoteauthor, quotepage) {
+    const book = new Book(title, author, pages, read, quote, quoteauthor, quotepage)
     books.push(book)
     const stack = library.books.findIndex(book => book.title === title)
     display(library.books[stack])
   }
-  // addABook.addEventListener('click', function() {
-  //   console.log('Oh look a new book!')
-  // }) Meant to take all the information in modal and add a book
   function display (book) {
     const bookDiv = document.createElement('div')
     const bookInfo = document.createElement('h3')
@@ -53,7 +51,6 @@ const library = (() => {
     const bookQuote = document.createElement('blockquote')
     const bookQuoteText = document.createElement('h5')
     const bookQuoteAuthor = document.createElement('figcaption')
-  
     bookInfo.innerHTML = book.info()
     bookDel.innerHTML = 'Remove'
     bookDel.setAttribute('data-title', book.title)
@@ -81,6 +78,21 @@ const library = (() => {
   }
 })()
 
+const bookAdd = document.getElementById('submit')
+bookAdd.addEventListener('click', function (e) {
+  e.preventDefault()
+  const addBookTitle = document.getElementById('title').value
+  const addBookAuthor = document.getElementById('author').value
+  const addBookPages = document.getElementById('pages').value
+  const addBookRead = document.getElementById('read').value === 'true'
+  const addBookQuote = document.getElementById('quote').value
+  const addBookQuoteWho = document.getElementById('quotewho').value
+  const addBookQuoteWhere = document.getElementById('quotewhere').value
+  library.addBook(addBookTitle, addBookAuthor,addBookPages, addBookRead, addBookQuote, addBookQuoteWho, addBookQuoteWhere)
+  modal.style.display = 'none'
+  document.getElementById('form').reset()
+})
+
 function haveRead (book) {
   if (book.read === false) {
     return 'This book has not been read.'
@@ -92,5 +104,3 @@ function haveRead (book) {
 library.addBook('The Hidden Dimension', 'Edward T. Hall', 195)
 library.addBook('Meditations', 'Marcus Aurelius', 191, true, 'The book is full of quotes.')
 library.addBook('Crooked Kingdom', 'Leigh Bardugo', 546, true, 'You\'re not weak because you can\'t read. You\'re weak because you\'re afraid of people seeing your weakness. You\'re letting shame decide who you are.', 'Kaz')
-
-/* Use flexbox and add card class to display books on page. */
