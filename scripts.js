@@ -7,10 +7,12 @@ btn.onclick = function () {
 }
 span.onclick = function () {
   modal.style.display = 'none'
+  document.getElementById('form').reset()
 }
 window.onclick = function (event) {
   if (event.target === modal) {
     modal.style.display = 'none'
+    document.getElementById('form').reset()
   }
 }
 
@@ -115,7 +117,7 @@ bookAdd.addEventListener('click', function (e) {
   const addBookQuoteWho = document.getElementById('quotewho').value
   const addBookQuoteWhere = document.getElementById('quotewhere').value
   if (addBookTitle.length === 0 || addBookAuthor.length === 0) {
-    
+    return
   } else {
     library.addBook(addBookTitle, addBookAuthor,addBookPages, addBookRead, addBookQuote, addBookQuoteWho, addBookQuoteWhere)
     modal.style.display = 'none'
@@ -134,3 +136,10 @@ function haveRead (book) {
 library.addBook('The Hidden Dimension', 'Edward T. Hall', 195)
 library.addBook('Meditations', 'Marcus Aurelius', 191, true, 'The book is full of quotes.')
 library.addBook('Crooked Kingdom', 'Leigh Bardugo', 546, true, 'You\'re not weak because you can\'t read. You\'re weak because you\'re afraid of people seeing your weakness. You\'re letting shame decide who you are.', 'Kaz')
+
+// TODO: Reset form whenever the form is closed
+// TODO: Add property to edit book object
+// TODO: Add card element
+// TODO: Add cards container
+// TODO: Make edit and del part of card
+// TODO: Add navbar
