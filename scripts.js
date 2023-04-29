@@ -7,12 +7,12 @@ btn.onclick = function () {
 }
 span.onclick = function () {
   modal.style.display = 'none'
-  document.getElementById('form').reset()
+  formReset()
 }
 window.onclick = function (event) {
   if (event.target === modal) {
     modal.style.display = 'none'
-    document.getElementById('form').reset()
+    formReset()
   }
 }
 
@@ -41,7 +41,7 @@ const library = (() => {
   }
   function addBook (title, author, pages, read, quote, quoteauthor, quotepage) {
     const book = new Book(title, author, pages, read, quote, quoteauthor, quotepage)
-    books.push(book)
+    books.unshift(book)
     const stack = library.books.findIndex(book => book.title === title)
     display(library.books[stack])
   }
@@ -79,6 +79,22 @@ const library = (() => {
   }
 })()
 
+function formReset () {
+  const quote = document.getElementById('quote')
+  const quoteWho = document.getElementById('quotewho')
+  const quoteWhere = document.getElementById('quotewhere')
+  const readBookAnswer = document.getElementById('answer')
+
+  document.getElementById('quote').disabled = true
+  document.getElementById('quotewho').disabled = true
+  document.getElementById('quotewhere').disabled = true
+  quote.placeholder = 'How would you know if you haven\'t read the book?'
+  quoteWho.placeholder = ''
+  quoteWhere.placeholder = ''
+  readBookAnswer.textContent = '    Nope'
+  document.getElementById('form').reset()
+}
+
 const bookRead = document.querySelector('#read')
 bookRead.addEventListener('click', checkboxClick)
 
@@ -96,13 +112,7 @@ function checkboxClick () {
     quoteWhere.placeholder = 1
     readBookAnswer.textContent = '    Yup'
   } else {
-    document.getElementById('quote').disabled = true
-    document.getElementById('quotewho').disabled = true
-    document.getElementById('quotewhere').disabled = true
-    quote.placeholder = 'How would you know if you haven\'t read the book?'
-    quoteWho.placeholder = ''
-    quoteWhere.placeholder = ''
-    readBookAnswer.textContent = '    Nope'
+    formReset()
   }
 }
 
@@ -122,6 +132,7 @@ bookAdd.addEventListener('click', function (e) {
     library.addBook(addBookTitle, addBookAuthor,addBookPages, addBookRead, addBookQuote, addBookQuoteWho, addBookQuoteWhere)
     modal.style.display = 'none'
     document.getElementById('form').reset()
+    formReset()
   }
 })
 

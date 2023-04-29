@@ -14,6 +14,7 @@
 - [x] Add functions
 	- [x] Add a book
 		- [x] Update page
+		- [x] Reset form after exit
 	- [x] Delete book
 		- Changed to splice, it modifies current array whereas filter generates a new one.
 		- [x] Update page
@@ -23,5 +24,6 @@
 ## Optional addons
 - [ ] Search
 	- Use indexOf
+	- Search multiple values, return on each keydown
 - [ ] Sorting
 - [ ] Login
