@@ -7,10 +7,29 @@
         <title>Library of Alexandria: Starting anew</title>
     </head>
     <body>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="close">&times;</div>
+                <fieldset>
+                    <legend>Add a book</legend>
+                    <form>
+                        <label for="title">Title of the book</label>
+                        <input type="text" id="title">
+                        <label for="author">Name of author</label><input type="text" id="author">
+                        <label for="pages">How many pages?</label><input type="text" id="pages">
+                        <label for="read">Read the book?</label><input type="checkbox" name="read" id="read">
+                        <label for="quote">Memorable quote?</label>
+                        <label for="quotewho">Who said the quote?</label>
+                        <!-- Make it so quote cannot be selected if the book has not been read. -->
+                    </form>
+                </fieldset>
+            </div>
+
+</div>
         <h1>Here be the Library of Alexandria.</h1>
         <h3>Oh. Oh dear. It has been burned down.</h3>
         <h4>Perhaps you could help build it up again?</h4>
-        <button id='add' disabled>Add a book</button>
+        <button id='myBtn'>Add a book</button>
         <div id="display">
         </div>
     </body>

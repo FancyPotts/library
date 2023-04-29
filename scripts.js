@@ -1,8 +1,25 @@
-let library = (() => {
-  let books = []
-  const displayBook = document.getElementById('display')
+const modal = document.getElementById("myModal");
+const btn = document.getElementById("myBtn");
+const span = document.getElementsByClassName("close")[0];
 
-  function Book (title, author, pages, read = false, quote = 'No quote (yet)', quoteauthor = '', booksArray = books) {
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+span.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+const library = (() => {
+  const books = []
+  const displayBook = document.getElementById('display')
+  const addABook = document.getElementById('add')
+
+  function Book (title, author, pages, read = false, quote = 'No quote (yet)', quoteauthor = '') {
     this.title = title
     this.author = author
     this.pages = pages
@@ -26,6 +43,9 @@ let library = (() => {
     const stack = library.books.findIndex(book => book.title === title)
     display(library.books[stack])
   }
+  // addABook.addEventListener('click', function() {
+  //   console.log('Oh look a new book!')
+  // }) Meant to take all the information in modal and add a book
   function display (book) {
     const bookDiv = document.createElement('div')
     const bookInfo = document.createElement('h3')
