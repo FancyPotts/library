@@ -3,18 +3,27 @@
   font-weight: 250;
 }
 
-.card {
-  flex: 1;
-  display: grid;
-  outline: 1px solid black;
-}
 
 #display {
   display: flex;
-  flex: wrap;
+  flex-wrap: wrap;
   gap: 1em;
   padding: 1em;
   outline: 1px solid red;
+  overflow: hidden;
+}
+
+.card {
+  width: 200px;
+  height: 300px;
+  display: grid;
+  outline: 1px solid black;
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  width: 100%;
 }
 
 p {
