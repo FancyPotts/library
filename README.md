@@ -24,8 +24,8 @@
 		- [ ] Change submit & legend
 			- [x] Same modal, different messages
 			- [ ] Update changes to array
+- [x] Add icon font
 - [ ] Nav with add button
-- [ ] Footer
 - [ ] Build card
 	- [ ] Display as cards in row with wrap
 	- [ ] Sort at random on every window load

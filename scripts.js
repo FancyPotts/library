@@ -40,7 +40,7 @@ const library = (() => {
     this.quoteauthor = quoteauthor
     this.quotepage = quotepage
     this.info = function () {
-      return `<u>${this.title}</u> by <i>${this.author}</i>`
+      return `<u>${this.title}</u><H5><i>${this.author}</i></h5></span>`
     }
   }
   function list () {
@@ -69,7 +69,6 @@ const library = (() => {
     bookEdit.classList.add('edit', 'material-icons')
     bookInfo.innerHTML = book.info()
     bookEdit.innerHTML = 'settings'
-    bookEdit.disabled = false
     bookEdit.setAttribute('data-title', book.title)
     bookEdit.onclick = function() {
       const title = this.getAttribute('data-title')
@@ -81,6 +80,7 @@ const library = (() => {
       mainBookQuote.value = books[bookIndex].quote
       mainBookQuoteWho.value = books[bookIndex].quoteauthor
       mainBookQuoteWhere.value = books[bookIndex].quotepage
+      checkboxClick()
       // checkboxClick() This causes any book entry to come up empty when editing, due to the boolean returns
       editLegend.innerHTML = 'Edit details'
       editBtn.innerHTML = 'Update book details'
@@ -183,11 +183,10 @@ function haveRead (book) {
   }
 }
 
+library.addBook('Fahrenheit 451', 'Ray Bradbury', 158, true, 'It was a pleasure to burn', 'Guy Montag', 1)
 library.addBook('The Hidden Dimension', 'Edward T. Hall', 195)
-library.addBook('Meditations', 'Marcus Aurelius', 191, true, 'The book is full of quotes.')
+library.addBook('Meditations', 'Marcus Aurelius', 191, true, 'You could leave life right now. Let that determine what you do, say and think.', 'Marcus Aurelius')
 library.addBook('Crooked Kingdom', 'Leigh Bardugo', 546, true, 'You\'re not weak because you can\'t read. You\'re weak because you\'re afraid of people seeing your weakness. You\'re letting shame decide who you are.', 'Kaz')
 
-// TODO: Add card element
-// TODO: Add cards container
-// TODO: Make edit and del part of card
+
 // TODO: Add navbar
