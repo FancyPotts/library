@@ -1,18 +1,29 @@
 const modal = document.getElementById('myModal')
 const btn = document.getElementById('myBtn')
 const span = document.getElementsByClassName('close')[0]
+const editLegend = document.getElementById('modalLegend')
+const editBtn = document.getElementById('submit')
+const mainBookTitle = document.getElementById('title')
+const mainBookAuthor = document.getElementById('author')
+const mainBookPages = document.getElementById('pages')
+const mainBookRead = document.getElementById('read')
+const mainBookQuote = document.getElementById('quote')
+const mainBookQuoteWho = document.getElementById('quotewho')
+const mainBookQuoteWhere = document.getElementById('quotewhere')
 
 btn.onclick = function () {
+  editLegend.innerHTML = 'Add a book'
+  editBtn.innerHTML = 'Add book to library'
   modal.style.display = 'block'
 }
 span.onclick = function () {
   modal.style.display = 'none'
-  formReset()
+  formReset(true)
 }
 window.onclick = function (event) {
   if (event.target === modal) {
     modal.style.display = 'none'
-    formReset()
+    formReset(true)
   }
 }
 
@@ -47,6 +58,7 @@ const library = (() => {
   }
   function display (book) {
     const bookDiv = document.createElement('div')
+    bookDiv.className = 'card'
     const bookInfo = document.createElement('h3')
     const bookDel = document.createElement('button')
     const bookEdit = document.createElement('button')
@@ -58,17 +70,18 @@ const library = (() => {
     bookEdit.disabled = false
     bookEdit.setAttribute('data-title', book.title)
     bookEdit.onclick = function() {
-      const editLegend = document.getElementById('modalLegend')
-      const editBtn = document.getElementById('submit')
-      const addBookTitle = document.getElementById('title').value
-      const addBookAuthor = document.getElementById('author').value
-      const addBookPages = document.getElementById('pages').value
-      const addBookRead = document.getElementById('read').value === 'true'
-      const addBookQuote = document.getElementById('quote').value
-      const addBookQuoteWho = document.getElementById('quotewho').value
-      const addBookQuoteWhere = document.getElementById('quotewhere').value
-      editLegend.innerHTML = 'Edit a Book'
-      editBtn.innerHTML = 'Edit book details'
+      const title = this.getAttribute('data-title')
+      const bookIndex = books.findIndex(book => book.title === title)
+      mainBookTitle.value = books[bookIndex].title
+      mainBookAuthor.value = books[bookIndex].author
+      mainBookPages.value = books[bookIndex].pages
+      mainBookRead.checked = books[bookIndex].read
+      mainBookQuote.value = books[bookIndex].quote
+      mainBookQuoteWho.value = books[bookIndex].quoteauthor
+      mainBookQuoteWhere.value = books[bookIndex].quotepage
+      // checkboxClick() This causes any book entry to come up empty when editing, due to the boolean returns
+      editLegend.innerHTML = 'Edit book details'
+      editBtn.innerHTML = 'Update'
       modal.style.display = 'block'
     }
     bookDel.innerHTML = 'Remove'
@@ -98,7 +111,7 @@ const library = (() => {
   }
 })()
 
-function formReset () {
+function formReset (newForm = false) {
   const quote = document.getElementById('quote')
   const quoteWho = document.getElementById('quotewho')
   const quoteWhere = document.getElementById('quotewhere')
@@ -111,7 +124,11 @@ function formReset () {
   quoteWho.placeholder = ''
   quoteWhere.placeholder = ''
   readBookAnswer.textContent = '    Nope'
-  document.getElementById('form').reset()
+  if (newForm === true) {
+    document.getElementById('form').reset()
+  } else {
+    return
+  }
 }
 
 const bookRead = document.querySelector('#read')
@@ -131,7 +148,7 @@ function checkboxClick () {
     quoteWhere.placeholder = 1
     readBookAnswer.textContent = '    Yup'
   } else {
-    formReset()
+    formReset(false)
   }
 }
 
@@ -151,7 +168,8 @@ bookAdd.addEventListener('click', function (e) {
     library.addBook(addBookTitle, addBookAuthor,addBookPages, addBookRead, addBookQuote, addBookQuoteWho, addBookQuoteWhere)
     modal.style.display = 'none'
     document.getElementById('form').reset()
-    formReset()
+    console.log('Reset!')
+    formReset(true)
   }
 })
 
@@ -167,8 +185,6 @@ library.addBook('The Hidden Dimension', 'Edward T. Hall', 195)
 library.addBook('Meditations', 'Marcus Aurelius', 191, true, 'The book is full of quotes.')
 library.addBook('Crooked Kingdom', 'Leigh Bardugo', 546, true, 'You\'re not weak because you can\'t read. You\'re weak because you\'re afraid of people seeing your weakness. You\'re letting shame decide who you are.', 'Kaz')
 
-// TODO: Reset form whenever the form is closed
-// TODO: Add property to edit book object
 // TODO: Add card element
 // TODO: Add cards container
 // TODO: Make edit and del part of card

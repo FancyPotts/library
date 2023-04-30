@@ -20,12 +20,15 @@
 		- [x] Update page
 	- [ ] Edit book
 		- Modify modal so it displays values and updates.
-		- [ ] Display values
+		- [x] Display values
 		- [ ] Change submit & legend
-			- [ ] Edit book
+			- [x] Same modal, different messages
+			- [ ] Update changes to book in array
 			- [ ] innerHTML to reflect this
-- [ ] Output as flexbox items
-	- [ ] Sort at random on every window load.
+- [ ] Nav with add button
+- [ ] Build card
+	- [ ] Display as cards in row with wrap
+	- [ ] Sort at random on every window load
 
 ## Optional addons
 - [ ] Search

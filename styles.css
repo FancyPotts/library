@@ -3,12 +3,18 @@
   font-weight: 250;
 }
 
-card {
-
+.card {
+  flex: 1;
+  display: grid;
+  outline: 1px solid black;
 }
 
-cards {
-  
+#display {
+  display: flex;
+  flex: wrap;
+  gap: 1em;
+  padding: 1em;
+  outline: 1px solid red;
 }
 
 p {
