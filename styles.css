@@ -3,7 +3,6 @@
   font-weight: 250;
 }
 
-
 #display {
   display: flex;
   flex-wrap: wrap;
@@ -13,13 +12,27 @@
   overflow: hidden;
 }
 
-.card {
+.card,
+.template {
   width: 200px;
   height: 300px;
-  display: grid;
   outline: 1px solid black;
   overflow: hidden;
+  position: relative;
 }
+
+.edit {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.del {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
 
 body {
   height: 100%;
@@ -32,6 +45,16 @@ p {
 
 button {
     margin-left: 10%;
+    border: 0;
+    padding: 0;
+    background:rgba(0, 0, 0, 0.0);
+    color:rgb(87, 87, 87, 0.7);
+    cursor: pointer;
+    cursor: auto;
+}
+
+button:hover {
+  color: rgb(0,0,0)
 }
 
 form {

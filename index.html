@@ -3,6 +3,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <link rel="stylesheet" href="styles.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
         <script src="scripts.js" defer></script>
         <title>Library of Alexandria: Starting anew</title>
     </head>
@@ -32,12 +34,19 @@
                 </fieldset>
             </div>
 </div>
-        <h1>Here be the Library of Alexandria.</h1>
+        <h1>Here be the Library of Alexandria.<span class='material-icons'>delete_forever settings library_add</span></h1>
         <h3>Oh. Oh dear. It has been burned down.</h3>
         <h4>Perhaps you could help build it up again?</h4>
-        <button id='myBtn'>Add a book</button>
+        <button id='myBtn' class="material-icons">library_add</button>
         <div id="display">
-                <div class="card"><u>Template</u><i>Aaron</i><button data-title="The Hidden Dimension">Edit</button><button data-title="The Hidden Dimension">Remove</button><blockquote><h5>You miss 100% shots you don't take</h5><figcaption>Abraham Lincoln</figcaption></blockquote></div>
+                <div class="template">
+                    <div class="title">
+                        <u>Template</u>
+                    </div>
+                    <div class="author">
+                        <i>Aaron</i>
+                    </div>
+                    <button class='edit' data-title="Template" disabled>Edit</button><button data-title="Template" class="del">Remove</button></div>
             </div>
         </div>
     </body>

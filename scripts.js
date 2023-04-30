@@ -65,8 +65,10 @@ const library = (() => {
     const bookQuote = document.createElement('blockquote')
     const bookQuoteText = document.createElement('h5')
     const bookQuoteAuthor = document.createElement('figcaption')
+    bookDel.classList.add('del', 'material-icons')
+    bookEdit.classList.add('edit', 'material-icons')
     bookInfo.innerHTML = book.info()
-    bookEdit.innerHTML = 'Edit'
+    bookEdit.innerHTML = 'settings'
     bookEdit.disabled = false
     bookEdit.setAttribute('data-title', book.title)
     bookEdit.onclick = function() {
@@ -80,11 +82,11 @@ const library = (() => {
       mainBookQuoteWho.value = books[bookIndex].quoteauthor
       mainBookQuoteWhere.value = books[bookIndex].quotepage
       // checkboxClick() This causes any book entry to come up empty when editing, due to the boolean returns
-      editLegend.innerHTML = 'Edit book details'
-      editBtn.innerHTML = 'Update'
+      editLegend.innerHTML = 'Edit details'
+      editBtn.innerHTML = 'Update book details'
       modal.style.display = 'block'
     }
-    bookDel.innerHTML = 'Remove'
+    bookDel.innerHTML = 'delete_forever'
     bookDel.setAttribute('data-title', book.title)
     bookDel.addEventListener('click', function() {
       const title = this.getAttribute('data-title')
