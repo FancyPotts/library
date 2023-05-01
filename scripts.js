@@ -30,6 +30,7 @@ window.onclick = function (event) {
 const library = (() => {
   const books = []
   const displayBook = document.getElementById('display')
+  let bookIndex = 0
 
   function Book (title, author, pages, read = false, quote = 'No quote (yet)', quoteauthor = '', quotepage = '') {
     this.title = title
@@ -73,8 +74,7 @@ const library = (() => {
     bookEdit.setAttribute('data-title', book.title)
     bookEdit.onclick = function () {
       const title = this.getAttribute('data-title')
-      const bookIndex = books.findIndex(book => book.title === title)
-      console.log(bookIndex)
+      bookIndex = books.findIndex(book => book.title === title)
       mainBookTitle.value = books[bookIndex].title
       mainBookAuthor.value = books[bookIndex].author
       mainBookPages.value = books[bookIndex].pages
@@ -87,40 +87,40 @@ const library = (() => {
       editLegend.innerHTML = 'Edit details'
       bookSubmit.innerHTML = 'Update book details'
       modal.style.display = 'block'
-      bookSubmit.addEventListener('click', function (e) {
-        e.preventDefault()
-        const addBookTitle = document.getElementById('title').value
-        const addBookAuthor = document.getElementById('author').value
-        const addBookPages = document.getElementById('pages').value
-        const addBookRead = document.getElementById('read').value === 'true'
-        const addBookQuote = document.getElementById('quote').value
-        const addBookQuoteWho = document.getElementById('quotewho').value
-        const addBookQuoteWhere = document.getElementById('quotewhere').value
-        console.log(bookIndex)
-        if (addBookTitle.length === 0 || addBookAuthor.length === 0) {
-          return
-        } else if (bookSubmit.innerHTML === 'Add book to library') {
-          library.addBook(addBookTitle, addBookAuthor, addBookPages, addBookRead, addBookQuote, addBookQuoteWho, addBookQuoteWhere)
-          modal.style.display = 'none'
-          document.getElementById('form').reset()
-          console.log('Reset!')
-          formReset(true)
-        } else {
-          console.log('Edited!')
-          console.log(bookIndex)
-          books[bookIndex].title = mainBookTitle.value
-          books[bookIndex].author = mainBookAuthor.value
-          books[bookIndex].pages = mainBookPages.value
-          books[bookIndex].read = mainBookRead.checked
-          books[bookIndex].quote = mainBookQuote.value
-          books[bookIndex].quoteauthor = mainBookQuoteWho.value
-          books[bookIndex].quotepage = mainBookQuoteWhere.value
-          modal.style.display = 'none'
-          document.getElementById('form').reset()
-          formReset(true)
-        }
-      })
+      return bookIndex
     }
+    bookSubmit.addEventListener('click', function (e) {
+      e.preventDefault()
+      const addBookTitle = document.getElementById('title').value
+      const addBookAuthor = document.getElementById('author').value
+      const addBookPages = document.getElementById('pages').value
+      const addBookRead = document.getElementById('read').value === 'true'
+      const addBookQuote = document.getElementById('quote').value
+      const addBookQuoteWho = document.getElementById('quotewho').value
+      const addBookQuoteWhere = document.getElementById('quotewhere').value
+      if (addBookTitle.length === 0 || addBookAuthor.length === 0) {
+        return
+      } else if (bookSubmit.innerHTML === 'Add book to library') {
+        library.addBook(addBookTitle, addBookAuthor, addBookPages, addBookRead, addBookQuote, addBookQuoteWho, addBookQuoteWhere)
+        modal.style.display = 'none'
+        document.getElementById('form').reset()
+        console.log('Reset!')
+        formReset(true)
+      } else {
+        console.log('Edited!')
+        console.log(bookIndex)
+        books[bookIndex].title = mainBookTitle.value
+        books[bookIndex].author = mainBookAuthor.value
+        books[bookIndex].pages = mainBookPages.value
+        books[bookIndex].read = mainBookRead.checked
+        books[bookIndex].quote = mainBookQuote.value
+        books[bookIndex].quoteauthor = mainBookQuoteWho.value
+        books[bookIndex].quotepage = mainBookQuoteWhere.value
+        modal.style.display = 'none'
+        document.getElementById('form').reset()
+        formReset(true)
+      }
+    })
     bookDel.innerHTML = 'delete_forever'
     bookDel.setAttribute('data-title', book.title)
     bookDel.addEventListener('click', function () {

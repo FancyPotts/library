@@ -23,7 +23,8 @@
 		- [x] Display values
 		- [x] Change submit & legend
 			- [x] Same modal, different messages
-			- [ ] Update changes to array
+			- [x] Update changes to array
+				- [ ] Update card with changes.
 	- [ ] Create one function that focuses on book properties
 		- [ ] Create
 		- [ ] Find index of
