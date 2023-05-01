@@ -21,13 +21,19 @@
 	- [ ] Edit book
 		- Modify modal so it displays values and updates.
 		- [x] Display values
-		- [ ] Change submit & legend
+		- [x] Change submit & legend
 			- [x] Same modal, different messages
 			- [ ] Update changes to array
+	- [ ] Create one function that focuses on book properties
+		- [ ] Create
+		- [ ] Find index of
+		- [ ] Edit
+		- [ ] Display
+
 - [x] Add icon font
 - [ ] Nav with add button
-- [ ] Build card
-	- [ ] Display as cards in row with wrap
+- [x] Build card
+	- [x] Display as cards in row with wrap
 	- [ ] Sort at random on every window load
 
 ## Optional addons

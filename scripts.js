@@ -40,7 +40,7 @@ const library = (() => {
     this.quoteauthor = quoteauthor
     this.quotepage = quotepage
     this.info = function () {
-      return `<u>${this.title}</u><H5><i>${this.author}</i></h5></span>`
+      return `<strong>${this.title}</strong><H5><i>${this.author}</i></h5></span>`
     }
   }
   function list () {
@@ -85,6 +85,17 @@ const library = (() => {
       editLegend.innerHTML = 'Edit details'
       editBtn.innerHTML = 'Update book details'
       modal.style.display = 'block'
+      editBtn.onclick = function() {
+        if (editBtn.innerHTML === 'Update book details') {
+          books[bookIndex].title = mainBookTitle.value
+          books[bookIndex].author = mainBookAuthor.value
+          books[bookIndex].pages = mainBookPages.value
+          books[bookIndex].read = mainBookRead.checked
+          books[bookIndex].quote = mainBookQuote.value
+          books[bookIndex].quoteauthor = mainBookQuoteWho.value
+          books[bookIndex].quotepage = mainBookQuoteWhere.value
+        }
+      }
     }
     bookDel.innerHTML = 'delete_forever'
     bookDel.setAttribute('data-title', book.title)
@@ -167,7 +178,7 @@ bookAdd.addEventListener('click', function (e) {
   if (addBookTitle.length === 0 || addBookAuthor.length === 0) {
     return
   } else {
-    library.addBook(addBookTitle, addBookAuthor,addBookPages, addBookRead, addBookQuote, addBookQuoteWho, addBookQuoteWhere)
+    library.addBook(addBookTitle, addBookAuthor, addBookPages, addBookRead, addBookQuote, addBookQuoteWho, addBookQuoteWhere)
     modal.style.display = 'none'
     document.getElementById('form').reset()
     console.log('Reset!')

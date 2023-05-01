@@ -12,9 +12,10 @@
 #display {
   display: flex;
   flex-wrap: wrap;
-  gap: 1em;
   padding: 1em;
   overflow: hidden;
+  gap: 20px;
+  justify-content: flex-start;
 }
 
 .card {
@@ -25,12 +26,14 @@
   position: relative;
   flex: 0 0 auto;
   border-radius: 7px;
-  box-shadow: 3px 3px 3px rgba(13, 13, 13, 0.54);
+  box-shadow: 3px 3px 5px 1px rgba(13, 13, 13, 0.54);
   transition: all .25s ease-in-out;
+
 }
 
 .card:hover {
-  box-shadow: 4px 4px 6px 1px rgba(13, 13, 13, 0.54);;
+  box-shadow: 6px 6px 9px 3px rgba(13, 13, 13, 0.54);
+
 }
 
 .edit {
