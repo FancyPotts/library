@@ -2,7 +2,7 @@ const modal = document.getElementById('myModal')
 const btn = document.getElementById('myBtn')
 const span = document.getElementsByClassName('close')[0]
 const editLegend = document.getElementById('modalLegend')
-const editBtn = document.getElementById('submit')
+const bookSubmit = document.getElementById('submit')
 const mainBookTitle = document.getElementById('title')
 const mainBookAuthor = document.getElementById('author')
 const mainBookPages = document.getElementById('pages')
@@ -13,7 +13,7 @@ const mainBookQuoteWhere = document.getElementById('quotewhere')
 
 btn.onclick = function () {
   editLegend.innerHTML = 'Add a book'
-  editBtn.innerHTML = 'Add book to library'
+  bookSubmit.innerHTML = 'Add book to library'
   modal.style.display = 'block'
 }
 span.onclick = function () {
@@ -56,6 +56,7 @@ const library = (() => {
     const stack = library.books.findIndex(book => book.title === title)
     display(library.books[stack])
   }
+
   function display (book) {
     const bookDiv = document.createElement('div')
     bookDiv.className = 'card'
@@ -70,9 +71,10 @@ const library = (() => {
     bookInfo.innerHTML = book.info()
     bookEdit.innerHTML = 'settings'
     bookEdit.setAttribute('data-title', book.title)
-    bookEdit.onclick = function() {
+    bookEdit.onclick = function () {
       const title = this.getAttribute('data-title')
       const bookIndex = books.findIndex(book => book.title === title)
+      console.log(bookIndex)
       mainBookTitle.value = books[bookIndex].title
       mainBookAuthor.value = books[bookIndex].author
       mainBookPages.value = books[bookIndex].pages
@@ -83,10 +85,29 @@ const library = (() => {
       checkboxClick()
       // checkboxClick() This causes any book entry to come up empty when editing, due to the boolean returns
       editLegend.innerHTML = 'Edit details'
-      editBtn.innerHTML = 'Update book details'
+      bookSubmit.innerHTML = 'Update book details'
       modal.style.display = 'block'
-      editBtn.onclick = function() {
-        if (editBtn.innerHTML === 'Update book details') {
+      bookSubmit.addEventListener('click', function (e) {
+        e.preventDefault()
+        const addBookTitle = document.getElementById('title').value
+        const addBookAuthor = document.getElementById('author').value
+        const addBookPages = document.getElementById('pages').value
+        const addBookRead = document.getElementById('read').value === 'true'
+        const addBookQuote = document.getElementById('quote').value
+        const addBookQuoteWho = document.getElementById('quotewho').value
+        const addBookQuoteWhere = document.getElementById('quotewhere').value
+        console.log(bookIndex)
+        if (addBookTitle.length === 0 || addBookAuthor.length === 0) {
+          return
+        } else if (bookSubmit.innerHTML === 'Add book to library') {
+          library.addBook(addBookTitle, addBookAuthor, addBookPages, addBookRead, addBookQuote, addBookQuoteWho, addBookQuoteWhere)
+          modal.style.display = 'none'
+          document.getElementById('form').reset()
+          console.log('Reset!')
+          formReset(true)
+        } else {
+          console.log('Edited!')
+          console.log(bookIndex)
           books[bookIndex].title = mainBookTitle.value
           books[bookIndex].author = mainBookAuthor.value
           books[bookIndex].pages = mainBookPages.value
@@ -94,12 +115,15 @@ const library = (() => {
           books[bookIndex].quote = mainBookQuote.value
           books[bookIndex].quoteauthor = mainBookQuoteWho.value
           books[bookIndex].quotepage = mainBookQuoteWhere.value
+          modal.style.display = 'none'
+          document.getElementById('form').reset()
+          formReset(true)
         }
-      }
+      })
     }
     bookDel.innerHTML = 'delete_forever'
     bookDel.setAttribute('data-title', book.title)
-    bookDel.addEventListener('click', function() {
+    bookDel.addEventListener('click', function () {
       const title = this.getAttribute('data-title')
       const bookIndex = books.findIndex(book => book.title === title)
       books.splice(bookIndex, 1)
@@ -165,27 +189,6 @@ function checkboxClick () {
   }
 }
 
-const bookAdd = document.getElementById('submit')
-bookAdd.addEventListener('click', function (e) {
-  e.preventDefault()
-  const addBookTitle = document.getElementById('title').value
-  const addBookAuthor = document.getElementById('author').value
-  const addBookPages = document.getElementById('pages').value
-  const addBookRead = document.getElementById('read').value === 'true'
-  const addBookQuote = document.getElementById('quote').value
-  const addBookQuoteWho = document.getElementById('quotewho').value
-  const addBookQuoteWhere = document.getElementById('quotewhere').value
-  if (addBookTitle.length === 0 || addBookAuthor.length === 0) {
-    return
-  } else {
-    library.addBook(addBookTitle, addBookAuthor, addBookPages, addBookRead, addBookQuote, addBookQuoteWho, addBookQuoteWhere)
-    modal.style.display = 'none'
-    document.getElementById('form').reset()
-    console.log('Reset!')
-    formReset(true)
-  }
-})
-
 function haveRead (book) {
   if (book.read === false) {
     return 'This book has not been read.'
@@ -198,6 +201,5 @@ library.addBook('Fahrenheit 451', 'Ray Bradbury', 158, true, 'It was a pleasure 
 library.addBook('The Hidden Dimension', 'Edward T. Hall', 195)
 library.addBook('Meditations', 'Marcus Aurelius', 191, true, 'You could leave life right now. Let that determine what you do, say and think.', 'Marcus Aurelius')
 library.addBook('Crooked Kingdom', 'Leigh Bardugo', 546, true, 'You\'re not weak because you can\'t read. You\'re weak because you\'re afraid of people seeing your weakness. You\'re letting shame decide who you are.', 'Kaz')
-
 
 // TODO: Add navbar

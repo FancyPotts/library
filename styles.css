@@ -28,11 +28,11 @@
   border-radius: 7px;
   box-shadow: 3px 3px 5px 1px rgba(13, 13, 13, 0.54);
   transition: all .25s ease-in-out;
-
 }
 
 .card:hover {
   box-shadow: 6px 6px 9px 3px rgba(13, 13, 13, 0.54);
+  transform: scale(101%);
 
 }
 
@@ -132,7 +132,6 @@ p {
     overflow: auto;
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
-
   }
   
   .modal-content {
