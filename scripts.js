@@ -60,13 +60,13 @@ const library = (() => {
 
   function display (book) {
     const bookDiv = document.createElement('div')
-    bookDiv.className = 'card'
     const bookInfo = document.createElement('h3')
     const bookDel = document.createElement('button')
     const bookEdit = document.createElement('button')
     const bookQuote = document.createElement('blockquote')
     const bookQuoteText = document.createElement('h5')
     const bookQuoteAuthor = document.createElement('figcaption')
+    bookDiv.className = 'card'
     bookDel.classList.add('del', 'material-icons')
     bookEdit.classList.add('edit', 'material-icons')
     bookInfo.innerHTML = book.info()
@@ -107,8 +107,6 @@ const library = (() => {
         console.log('Reset!')
         formReset(true)
       } else {
-        console.log('Edited!')
-        console.log(bookIndex)
         books[bookIndex].title = mainBookTitle.value
         books[bookIndex].author = mainBookAuthor.value
         books[bookIndex].pages = mainBookPages.value
@@ -116,6 +114,21 @@ const library = (() => {
         books[bookIndex].quote = mainBookQuote.value
         books[bookIndex].quoteauthor = mainBookQuoteWho.value
         books[bookIndex].quotepage = mainBookQuoteWhere.value
+        console.log(bookIndex)
+        // nth-child search does not index from 0, hence + 1
+        const updateCard = document.querySelector('.card:nth-child(' + bookIndex + 1 + ')')
+        const updateCardTitle = updateCard.getElementsByTagName('h3')[0]
+        const updateButtons = updateCard.querySelectorAll('button')
+        updateButtons.forEach((button) => {
+          button.setAttribute('data-title', mainBookTitle.value)
+        })
+        updateCardTitle.innerHTML = books[bookIndex].info()
+
+        console.log(updateCardTitle)
+        console.log(updateCard)
+        // const updateBookQuote = document.createElement('blockquote')
+        // const updateBookQuoteText = document.createElement('h5')
+        // const updateBookQuoteAuthor = document.createElement('figcaption')
         modal.style.display = 'none'
         document.getElementById('form').reset()
         formReset(true)
