@@ -25,6 +25,7 @@
 			- [x] Same modal, different messages
 			- [x] Update changes to array
 				- [ ] Update card with changes.
+					- [ ] Refactor card update by using addBook function, delete old card, and push the new card to where the old card was.
 	- [ ] Create one function that focuses on book properties
 		- [ ] Create
 		- [ ] Find index of

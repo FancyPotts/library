@@ -106,7 +106,7 @@ const library = (() => {
         document.getElementById('form').reset()
         console.log('Reset!')
         formReset(true)
-      } else {
+      } else if (bookSubmit.innerHTML === 'Update book details') {
         books[bookIndex].title = mainBookTitle.value
         books[bookIndex].author = mainBookAuthor.value
         books[bookIndex].pages = mainBookPages.value
@@ -114,21 +114,18 @@ const library = (() => {
         books[bookIndex].quote = mainBookQuote.value
         books[bookIndex].quoteauthor = mainBookQuoteWho.value
         books[bookIndex].quotepage = mainBookQuoteWhere.value
-        console.log(bookIndex)
         // nth-child search does not index from 0, hence + 1
         const updateCard = document.querySelector('.card:nth-child(' + bookIndex + 1 + ')')
-        const updateCardTitle = updateCard.getElementsByTagName('h3')[0]
+        const updateCardTitle = updateCard.querySelector('h3')
         const updateButtons = updateCard.querySelectorAll('button')
+        // const updateCardQuoteText = updateCard.getElementsByTagName('h5')[0]
+        // const updateCardQuoteAuthor = updateCard.getElementsByTagName('figcaption')[0]
         updateButtons.forEach((button) => {
           button.setAttribute('data-title', mainBookTitle.value)
         })
         updateCardTitle.innerHTML = books[bookIndex].info()
-
-        console.log(updateCardTitle)
-        console.log(updateCard)
-        // const updateBookQuote = document.createElement('blockquote')
-        // const updateBookQuoteText = document.createElement('h5')
-        // const updateBookQuoteAuthor = document.createElement('figcaption')
+        // updateCardQuoteText.innerHTML = books[bookIndex].quote
+        // updateCardQuoteAuthor.innerHTML = books[bookIndex].quoteauthor
         modal.style.display = 'none'
         document.getElementById('form').reset()
         formReset(true)
