@@ -18,25 +18,27 @@
 	- [x] Delete book
 		- Changed to splice, it modifies current array whereas filter generates a new one.
 		- [x] Update page
-	- [ ] Edit book
+	- [x] Edit book
 		- Modify modal so it displays values and updates.
 		- [x] Display values
 		- [x] Change submit & legend
 			- [x] Same modal, different messages
 			- [x] Update changes to array
-				- [ ] Update card with changes.
-					- [ ] Refactor card update by using addBook function, delete old card, and push the new card to where the old card was.
+				- [x] Update card with changes.
 	- [ ] Create one function that focuses on book properties
 		- [ ] Create
 		- [ ] Find index of
 		- [ ] Edit
 		- [ ] Display
-
 - [x] Add icon font
 - [ ] Nav with add button
 - [x] Build card
 	- [x] Display as cards in row with wrap
 	- [ ] Sort at random on every window load
+
+- [ ] Fork library code
+	- [ ] Refactor card update by using addBook function, delete old card, and push the new card to where the old card was.
+	- [ ] Rework current code
 
 ## Optional addons
 - [ ] Search
